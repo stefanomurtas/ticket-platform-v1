@@ -1,9 +1,7 @@
-package ticket.platform.ticketplatform.enums;
+package ticket.platform.enums;
 
 public enum TicketStatus {
-    TO_DO("Da fare"),
-    IN_PROGRESS("In corso"),
-    COMPLETED("Completato");
+    TO_DO("Da fare"), IN_PROGRESS("In corso"), COMPLETED("Completato");
 
     private final String displayName;
 
@@ -19,5 +17,4 @@ public enum TicketStatus {
     public String toString() {
         return displayName;
     }
-
 }

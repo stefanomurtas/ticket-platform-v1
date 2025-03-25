@@ -25,7 +25,7 @@
                         <a class="nav-link" th:href="@{/ticket}" 
                         th:classappend="${current == 'tickets'} ? 'active' : 'not-active'">Ticket</a>
                     </li>
-                    <form th:action="@{/ticket/search/title}" th:action="@{/ticket/search/details}" method="get" class="d-flex mb-3">
+                    <form th:action="@{/ticket/search/by-title-or-details}"  method="get" class="d-flex mb-3">
                         <input type="text" name="query" class="form-control me-2" placeholder="Cerca nel titolo o nei dettagli" required>
                         <button type="submit" class="btn btn-primary">Cerca</button>
                     </form>

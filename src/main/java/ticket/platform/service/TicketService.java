@@ -1,17 +1,17 @@
-package ticket.platform.ticketplatform.service;
+package ticket.platform.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import ticket.platform.ticketplatform.entity.Category;
-import ticket.platform.ticketplatform.entity.Operator;
-import ticket.platform.ticketplatform.entity.Ticket;
-import ticket.platform.ticketplatform.enums.TicketStatus;
-import ticket.platform.ticketplatform.repository.CategoryRepository;
-import ticket.platform.ticketplatform.repository.OperatorRepository;
-import ticket.platform.ticketplatform.repository.TicketRepository;
+import ticket.platform.entity.Category;
+import ticket.platform.entity.Operator;
+import ticket.platform.entity.Ticket;
+import ticket.platform.enums.TicketStatus;
+import ticket.platform.repository.CategoryRepository;
+import ticket.platform.repository.OperatorRepository;
+import ticket.platform.repository.TicketRepository;
 
 @Service
 public class TicketService {
@@ -20,8 +20,7 @@ public class TicketService {
     private final CategoryRepository categoryRepository;
     private final OperatorRepository operatorRepository;
 
-    public TicketService(TicketRepository ticketRepository, CategoryRepository categoryRepository,
-            OperatorRepository operatorRepository) {
+    public TicketService(TicketRepository ticketRepository, CategoryRepository categoryRepository, OperatorRepository operatorRepository) {
         this.ticketRepository = ticketRepository;
         this.categoryRepository = categoryRepository;
         this.operatorRepository = operatorRepository;
@@ -48,15 +47,8 @@ public class TicketService {
         return ticketRepository.findAllByOperatorId(operatorId);
     }
 
-    public Ticket createTicket(String title, String details, TicketStatus status, Long categoryId, Long operatorId) {
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new IllegalArgumentException("Categoria non trovata"));
-        Operator operator = operatorRepository.findById(operatorId)
-                .orElseThrow(() -> new IllegalArgumentException("Operatore non trovato"));
-
-        Ticket ticket = new Ticket(status, title, details, category, operator, LocalDateTime.now(),
-                LocalDateTime.now());
-        return ticketRepository.save(ticket);
+    public Ticket createTicket(String title, String details, TicketStatus status, Category category, Operator operator) {
+        return ticketRepository.save(new Ticket(status, title, details, category, operator, LocalDateTime.now(), LocalDateTime.now()));
     }
 
     public Ticket updateTicket(Ticket updatedTicket) {
@@ -72,19 +64,12 @@ public class TicketService {
     
         return ticketRepository.save(existingTicket);
     }
-    
 
     public void deleteTicketById(Long ticketId) {
         ticketRepository.deleteById(ticketId);
     }
-    public List<Ticket> findByTitle(String title){
-        return ticketRepository.findByTitleContaining(title);
+
+    public List<Ticket> search(String query) {
+        return ticketRepository.findByTitleLikeIgnoreCaseOrDetailsLikeIgnoreCase("%"+query+"%","%"+query+"%");
     }
-    public List<Ticket> findByDetails(String details){
-        return ticketRepository.findByDetailsContaining(details);
-
 }
-
-    public Ticket save(Ticket ticket) {
-        return ticketRepository.save(ticket);
-    }}

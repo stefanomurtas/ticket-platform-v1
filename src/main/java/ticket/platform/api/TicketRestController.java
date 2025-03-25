@@ -1,19 +1,12 @@
-
-package ticket.platform.ticketplatform.api;
-
-import java.util.List;
+package ticket.platform.api;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ticket.platform.entity.Ticket;
+import ticket.platform.enums.TicketStatus;
+import ticket.platform.service.TicketService;
 
-import ticket.platform.ticketplatform.entity.Ticket;
-import ticket.platform.ticketplatform.enums.TicketStatus;
-import ticket.platform.ticketplatform.service.TicketService;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -36,7 +29,7 @@ public class TicketRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Ticket>> getAllticket() {
+    public ResponseEntity<List<Ticket>> getAllTickets() {
         return ResponseEntity.ok(ticketService.getAllTickets());
     }
 

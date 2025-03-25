@@ -1,15 +1,15 @@
-package ticket.platform.ticketplatform.enums;
-
-import java.time.LocalDateTime;
+package ticket.platform.enums;
 
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.PastOrPresent;
 
+import java.time.LocalDateTime;
+
 @MappedSuperclass
 public abstract class AbstractEntityStatus {
+
     @PastOrPresent(message = "non può essere creata in futuro")
     private LocalDateTime createdAt;
-
     @PastOrPresent(message = "non può essere creata in futuro")
     private LocalDateTime updatedAt;
 

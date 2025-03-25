@@ -1,29 +1,16 @@
-package ticket.platform.ticketplatform.entity;
-
-import java.time.LocalDateTime;
-
-import org.springframework.beans.factory.annotation.Autowired;
+package ticket.platform.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import ticket.platform.ticketplatform.enums.AbstractEntityStatus;
-import ticket.platform.ticketplatform.enums.TicketStatus;
+import ticket.platform.enums.AbstractEntityStatus;
+import ticket.platform.enums.TicketStatus;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tickets")
 public class Ticket extends AbstractEntityStatus {
-    @Autowired
 
     @Id
     @Column(name = "id")
@@ -38,33 +25,29 @@ public class Ticket extends AbstractEntityStatus {
     @Column(name = "details")
     @NotBlank(message = "Aggiungere dettagli per i problemi")
     private String details;
-
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     @JsonBackReference
     private Category category;
-
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "operator_id", nullable = false)
-
     private Operator operator;
 
-    public Long getId() {
-        return id;
-    }
     public Ticket() {
-
     }
 
-    public Ticket(TicketStatus status, String details, String title, Category category, Operator operator, LocalDateTime createdAt,LocalDateTime updatedAt) {
+    public Ticket(TicketStatus status, String details, String title, Category category, Operator operator, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super(createdAt, updatedAt);
         this.status = status;
         this.details = details;
         this.title = title;
         this.category = category;
         this.operator = operator;
+    }
 
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {

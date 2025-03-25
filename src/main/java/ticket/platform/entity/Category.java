@@ -1,12 +1,9 @@
-package ticket.platform.ticketplatform.entity;
+package ticket.platform.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import ticket.platform.ticketplatform.enums.AbstractEntityStatus;
+import jakarta.persistence.*;
+import ticket.platform.enums.AbstractEntityStatus;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "categories")
@@ -22,8 +19,8 @@ public class Category extends AbstractEntityStatus {
     public Category() {
     }
 
-    public Category(String name) {
-        super();
+    public Category(LocalDateTime createdAt, LocalDateTime updatedAt, String name) {
+        super(createdAt, updatedAt);
         this.name = name;
     }
 

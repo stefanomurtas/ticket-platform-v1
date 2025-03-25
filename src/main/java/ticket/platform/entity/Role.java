@@ -1,39 +1,23 @@
-package ticket.platform.ticketplatform.entity;
-
-import java.util.Set;
+package ticket.platform.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @NotBlank(message = "name non puo essere vuoto o null")
     private String name;
-
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     @JsonBackReference
-    private Set<Operator> operators;
-
-    public Set<Operator> getOperators() {
-        return this.operators;
-    }
-
-    public void setOperators(Set<Operator> operators) {
-        this.operators = operators;
-    }
+    private Set<User> user;
 
     public Integer getId() {
         return this.id;
@@ -51,4 +35,11 @@ public class Role {
         this.name = name;
     }
 
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
+    }
 }
