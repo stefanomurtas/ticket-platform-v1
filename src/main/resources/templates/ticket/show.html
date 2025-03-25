@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dettagli Ticket</title>
+    <link th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar('show')}" class="container"></div>
+    <main class="container mt-5">
+        <main class="container d-flex justify-content-center align-items-center" style="block-size:100vh;">
+            <section class="row justify-content-center w-100">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card shadow-lg">
+                        <div class="card-header text-center mt-3">
+                            <h2>Ticket [[${ticket.title}]]</h2>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Titolo</label>
+                                <p class="form-control" id="title" th:text="${ticket.title}"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="details" class="form-label">Dettagli</label>
+                                <p class="form-control" id="details" th:text="${ticket.details}"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="state" class="form-label">Stato</label>
+                                <p class="form-control" id="state" th:text="${ticket.status}"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoryId" class="form-label">Categoria</label>
+                                <p class="form-control" id="category" th:text="${ticket.category.name}"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="operatorId" class="form-label">Operatore</label>
+                                <p  class="form-control" id="operator" th:text="${ticket.operator.username}">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    </select>
+                </div>

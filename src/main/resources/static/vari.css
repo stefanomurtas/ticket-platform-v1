@@ -1,0 +1,9 @@
+.to-do {
+    background-color: yellow;
+}
+.in-progress {
+    background-color: orange;
+}
+.completed {
+    background-color: green;
+}
