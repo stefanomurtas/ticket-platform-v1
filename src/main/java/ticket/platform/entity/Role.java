@@ -1,10 +1,13 @@
 package ticket.platform.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
 import java.util.Set;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "roles")
@@ -15,8 +18,11 @@ public class Role {
     private Integer id;
     @NotBlank(message = "name non puo essere vuoto o null")
     private String name;
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-    @JsonBackReference
+    
+    
+    // @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    // @JsonBackReference
+    
     private Set<User> user;
 
     public Integer getId() {

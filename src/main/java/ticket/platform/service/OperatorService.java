@@ -1,12 +1,13 @@
 package ticket.platform.service;
 
 
-import org.springframework.stereotype.Service;
-import ticket.platform.entity.Operator;
-import ticket.platform.repository.OperatorRepository;
-
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import ticket.platform.entity.Operator;
+import ticket.platform.repository.OperatorRepository;
 
 @Service
 public class OperatorService {

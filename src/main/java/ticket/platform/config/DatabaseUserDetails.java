@@ -1,4 +1,4 @@
-package ticket.platform.service;
+package ticket.platform.config;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,7 +29,8 @@ public class DatabaseUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities == null ? new HashSet<>() : authorities;
+        // return authorities == null ? new HashSet<>() : authorities;
+        return this.authorities;
     }
 
     @Override
@@ -40,6 +41,9 @@ public class DatabaseUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+    public Long getId() {
+        return this.id;
     }
 
     @Override

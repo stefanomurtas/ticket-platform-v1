@@ -1,12 +1,20 @@
 package ticket.platform.controller;
 
-import jakarta.validation.Valid;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jakarta.validation.Valid;
 import ticket.platform.entity.Category;
 import ticket.platform.entity.Operator;
 import ticket.platform.entity.Ticket;
@@ -14,8 +22,6 @@ import ticket.platform.enums.TicketStatus;
 import ticket.platform.service.CategoryService;
 import ticket.platform.service.OperatorService;
 import ticket.platform.service.TicketService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/ticket")
@@ -170,4 +176,14 @@ public class TicketController {
 
         return "redirect:/ticket";
     }
+//     @GetMapping("/operator/tickets")
+// public String getTicketsForOperator(Model model, Principal principal) {
+//     String username = principal.getName();
+//     Operator operator = operatorRepository.findByUsername(username)
+//             .orElseThrow(() -> new UsernameNotFoundException("Operatore non trovato"));
+    
+//     List<Ticket> tickets = ticketService.findTicketsByOperatorId(operator.getId());
+//     model.addAttribute("tickets", tickets);
+//     return "operator/tickets"; 
+
 }

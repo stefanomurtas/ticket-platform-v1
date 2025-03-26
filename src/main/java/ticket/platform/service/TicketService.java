@@ -72,4 +72,10 @@ public class TicketService {
     public List<Ticket> search(String query) {
         return ticketRepository.findByTitleLikeIgnoreCaseOrDetailsLikeIgnoreCase("%"+query+"%","%"+query+"%");
     }
+    public List<Ticket> findTicketsByOperatorId(Long operatorId) {
+        return ticketRepository.findAllByOperatorId(operatorId);
+    }
+    
+    
+
 }

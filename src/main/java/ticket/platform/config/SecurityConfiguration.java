@@ -6,14 +6,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import ticket.platform.service.DatabaseUserDetailsService;
 
 public class SecurityConfiguration {
 
     @Bean
+    @SuppressWarnings({"removal"})
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeHttpRequests()
-                .requestMatchers("/user").hasAuthority("USER")
+                .requestMatchers("/ticket/create").hasAuthority("ADMIN")
+                .requestMatchers("/ticket/show").hasAuthority("ADMIN")
+                .requestMatchers("/ticket/edit").hasAuthority("ADMIN")
                 .requestMatchers("/admin").hasAuthority("ADMIN")
                 .requestMatchers("/").permitAll()
                 .and().formLogin()
