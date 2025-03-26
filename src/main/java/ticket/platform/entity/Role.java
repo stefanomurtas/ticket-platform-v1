@@ -2,10 +2,14 @@ package ticket.platform.entity;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -20,10 +24,9 @@ public class Role {
     private String name;
     
     
-    // @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-    // @JsonBackReference
-    
-    private Set<User> user;
+    @ManyToMany (mappedBy = "roles", fetch = FetchType.EAGER)
+    @JsonBackReference
+    private Set<User> users;
 
     public Integer getId() {
         return this.id;
@@ -42,10 +45,10 @@ public class Role {
     }
 
     public Set<User> getUser() {
-        return user;
+        return users;
     }
 
     public void setUser(Set<User> user) {
-        this.user = user;
+        this.users = user;
     }
 }
