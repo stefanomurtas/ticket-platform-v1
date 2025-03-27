@@ -3,15 +3,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
-    <!-- Font Awesome per le icone -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- CSS personalizzato -->
     <link th:href="@{/css/navbar.css}" rel="stylesheet">
 </head>
 <body>
     <nav th:fragment="navbar(current)" class="navbar navbar-expand-lg navbar-gray bg-custom-gray">
         <div class="container-fluid">
-            <a class="navbar-brand" href="@{/ticket/home}"
+            <a class="navbar-brand" href="@{/ticket/index}"
             th:classappend="${current == 'home'} ? 'active' : 'not-active'">Supporto Ticket</a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
@@ -41,6 +39,12 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/login"><i class="fas fa-sign-in-alt me-2"></i>Accedi</a></li>
                             <li><a class="dropdown-item" href="/register"><i class="fas fa-user-plus me-2"></i>Registrati</a></li>
+                            <li class="dropdown-item">
+                                <div class="user-info">
+                                    <span>Logger user: <span sec:authentication="name" class="fw-bold"></span></span><br>
+                                    <span>Roles: <span sec:authentication="principal.authorities" class="fst-italic"></span></span>
+                                </div>
+                            </li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/profile"><i class="fas fa-user-circle me-2"></i>Profilo</a></li>
                             <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt me-2"></i>Esci</a></li>

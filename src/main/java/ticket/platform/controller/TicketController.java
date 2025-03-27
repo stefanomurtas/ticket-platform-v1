@@ -176,14 +176,46 @@ public class TicketController {
 
         return "redirect:/ticket";
     }
-//     @GetMapping("/operator/tickets")
-// public String getTicketsForOperator(Model model, Principal principal) {
-//     String username = principal.getName();
-//     Operator operator = operatorRepository.findByUsername(username)
-//             .orElseThrow(() -> new UsernameNotFoundException("Operatore non trovato"));
-    
-//     List<Ticket> tickets = ticketService.findTicketsByOperatorId(operator.getId());
+// @GetMapping("/operator/tickets")
+// public String getTicketsAssignedToOperator(Principal principal, Model model) {
+//     String operatorId = principal.getName();
+//     List<Ticket> tickets = ticketService.findTicketsByOperatorId(operatorId);
 //     model.addAttribute("tickets", tickets);
-//     return "operator/tickets"; 
+//     return "operator/tickets";
+// }
+// @GetMapping("/operator/ticket/{id}")
+// public String getTicketDetails(@PathVariable Long id, Principal principal, Model model) {
+//     Ticket ticket = ticketService.getTicketDetails(id, principal.getName());
+//     model.addAttribute("ticket", ticket);
+//     return "operator/ticket-details";
+
+// @PostMapping("/operator/ticket/{id}/update-status")
+// public String updateTicketStatus(@PathVariable Long id, @RequestParam TicketStatus status, Principal principal) {
+//     ticketService.updateTicketStatus(id, status, principal.getName());
+//     return "redirect:/operator/ticket/" + id;
+
+
+// @PostMapping("/operator/ticket/{id}/add-note")
+// public String addNote(@PathVariable Long id, @RequestParam String content, Principal principal) {
+//     noteService.addNoteToTicket(id, content, principal.getName());
+//     return "redirect:/operator/ticket/" + id;
+
+// @PostMapping("/operator/update-status")
+// public String updateOperatorStatus(@RequestParam Boolean active, Principal principal) {
+//     operatorService.updateOperatorStatus(active, principal.getName());
+//     return "redirect:/operator/profile";
+// }
+
+@GetMapping("/category/{id}")
+public List<Ticket> getTicketsByCategory(@PathVariable Long id) {
+    return ticketService.getTicketsByCategoryId(id);
+}
+
+@GetMapping("/status/{status}")
+public List<Ticket> getTicketsByStatus(@PathVariable TicketStatus status) {
+    return ticketService.getTicketsByStatus(status);
+}
+
+
 
 }

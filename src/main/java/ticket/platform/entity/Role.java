@@ -19,20 +19,20 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @NotBlank(message = "name non puo essere vuoto o null")
     private String name;
     
     
     @ManyToMany (mappedBy = "roles", fetch = FetchType.EAGER)
-    @JsonBackReference
-    private Set<User> users;
+   @JsonBackReference
+    private Set<Operator> operators;
 
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,11 +44,13 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUser() {
-        return users;
+
+    public Set<Operator> getOperators() {
+        return this.operators;
     }
 
-    public void setUser(Set<User> user) {
-        this.users = user;
+    public void setOpeators(Set<Operator> operators) {
+        this.operators = operators;
     }
+    
 }

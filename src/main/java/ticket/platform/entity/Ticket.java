@@ -1,12 +1,24 @@
 package ticket.platform.entity;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import ticket.platform.enums.AbstractEntityStatus;
 import ticket.platform.enums.TicketStatus;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tickets")
@@ -25,15 +37,19 @@ public class Ticket extends AbstractEntityStatus {
     @Column(name = "details")
     @NotBlank(message = "Aggiungere dettagli per i problemi")
     private String details;
+    
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     @JsonBackReference
     private Category category;
+   
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "operator_id", nullable = false)
     private Operator operator;
-
+    
+    @OneToMany(mappedBy = "ticket")
+    private List<Note> notes;
     public Ticket() {
     }
 
@@ -93,4 +109,13 @@ public class Ticket extends AbstractEntityStatus {
     public void setOperator(Operator operator) {
         this.operator = operator;
     }
+
+    public List<Note> getNotes() {
+        return this.notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
 }

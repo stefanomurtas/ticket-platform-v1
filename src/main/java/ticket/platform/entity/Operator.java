@@ -1,11 +1,21 @@
 package ticket.platform.entity;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import ticket.platform.enums.AbstractEntityStatus;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "operators")
@@ -28,6 +38,15 @@ public class Operator extends AbstractEntityStatus {
     @Column(name = "active", nullable = false)
     private Boolean active;
 
+    
+     @ManyToMany (fetch=FetchType.EAGER)
+    @JoinTable(
+        name="operator_role",
+        joinColumns= @JoinColumn (name = "operator_id"),
+        inverseJoinColumns= @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
+    
     public Operator() {
     }
 
@@ -82,4 +101,13 @@ public class Operator extends AbstractEntityStatus {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    public Set<Role> getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 }
